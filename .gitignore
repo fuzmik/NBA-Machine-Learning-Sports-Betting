@@ -112,3 +112,4 @@ venv.bak/
 !/Models/*
 /Logs/
 /Screenshots/
+**Pipfile
