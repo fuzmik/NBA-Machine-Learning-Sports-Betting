@@ -12,13 +12,28 @@
       td.numbers { width: 40px; text-align: right;}
       table {margin-bottom: 6px;}
       th {text-align: center;}
+  /* Set background colors for even and odd rows */
+  tr.bet-info-row-even:nth-child(even) {
+    background-color: #2c3d49; /* Light gray for even rows */
+  }
+  tr.bet-info-row-odd:nth-child(odd) {
+    background-color: #415462; /* Blue for odd rows */
+  }
     </style>
   </head>
   <body>
     <main class="container">
-      <h1>NBA Machine Learning Picks ({{today}})</h1>
-      <table role="grid">
-      <thead>
+      <h1>NBA AI Picks ({{today}})</h1>
+<p>A machine learning AI used to predict the winners and under/overs of NBA games. Takes all team data from the 2007-08 season to 
+      the current season, matched with odds of those games, using a neural network to predict winning bets for today's games. 
+      Achieves ~69% accuracy on money lines and ~55% on under/overs. Outputs expected value for teams' money lines to provide 
+      better insight. The fraction of your bankroll to bet based on the Kelly Criterion is also outputted. Note that a popular, 
+      less risky approach is to bet 50% of the stake recommended by the Kelly Criterion.</p>
+<p1>To give an example, imagine you bet on a coin toss and the odds were +120 for heads (implied probability = 45.45%). In 
+      reality a coin toss has a 50% chance of landing on heads so in the long run you will eventually profit given enough bets if 
+      you only bet on heads. The idea is the same with EV, the higher the EV the higher the profitability of the bet. In this 
+      case the model still predicts that TeamA will win but it's more profitable to bet on the TeamB. In situations where 
+      the EV is negative for both teams you simply shouldn't bet.</p1> <table role="grid"> <thead>
           <th>Teams</th>
           <th>Fanduel</th>
           <th>Draftkings</th>
@@ -33,9 +48,11 @@
             <table>
               <tbody>
                 <tr>
+                <tr class="bet-info-row-even">
                   <td>{{ teams[0] }}</td>
                 </tr>
                 <tr>
+                <tr class="bet-info-row-odd">
                   <td>{{ teams[1] }}</td>
                 </tr>
               </tbody>
@@ -51,6 +68,7 @@
                 <table>
                   <tbody>
                     <tr>
+                      <tr class="bet-info-row-even">
                       <td class="numbers">{% if sbgame.away_team_odds|int > 0 %}+{%endif%}{{ sbgame.away_team_odds }}{% if sbgame.away_confidence %} <span class="ev-confidence">({{sbgame.away_confidence}}%)</span>{% endif %}</td>
                       <td class="numbers">
                         <span class="ev-value">{{ sbgame.away_team_ev }}</span>
@@ -58,6 +76,7 @@
                       <td class="numbers">{% if sbgame.ou_pick == 'OVER' %}O{%else%}U{%endif%} {{ sbgame.ou_value }}</td>
                     </tr>
                     <tr>
+                    <tr class="bet-info-row-odd">
                       <td class="numbers">{% if sbgame.home_team_odds|int > 0 %}+{%endif%}{{ sbgame.home_team_odds }}{% if sbgame.home_confidence %} <span class="ev-confidence">({{sbgame.home_confidence}}%)</span>{% endif %}</td>
                       <td class="numbers">
                         <span class="ev-value">{{ sbgame.home_team_ev }}</span>
