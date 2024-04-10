@@ -1,0 +1,3 @@
+{
+    "ollama-autocoder.endpoint": "http://100.117.14.63:11434/api/generate"
+}
