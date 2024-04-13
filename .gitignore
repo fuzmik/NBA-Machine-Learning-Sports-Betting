@@ -115,3 +115,4 @@ Models/*.json
 /Logs/
 /Screenshots/
 **Pipfile
+.vscode
