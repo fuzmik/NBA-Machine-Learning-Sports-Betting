@@ -1,7 +1,0 @@
-{
-    "ollama-autocoder.endpoint": "http://100.117.14.63:11434/api/generate",
-    "CodeGPT.apiKey": "CodeGPT Plus Beta",
-    "CodeGPT.Autocomplete.enabled": true,
-    "CodeGPT.Autocomplete.maxTokens": 2500,
-    "CodeGPT.Autocomplete.provider": "Ollama - codegpt/deepseek-coder-1.3b-typescript"
-}
