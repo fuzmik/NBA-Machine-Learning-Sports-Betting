@@ -109,8 +109,9 @@ venv.bak/
 
 
 # user define
-#/Models/
-#!/Models/*
+Models/*.json
+!Models/NN_Models
+!Models/XGBoost_Models
 /Logs/
 /Screenshots/
 **Pipfile

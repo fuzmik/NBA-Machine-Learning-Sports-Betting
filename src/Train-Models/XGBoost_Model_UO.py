@@ -48,3 +48,4 @@ for x in tqdm(range(100)):
     # only save results if they are the best so far
     if acc == max(acc_results):
         model.save_model('../../Models/XGBoost_{}%_UO-9.json'.format(acc))
+        print(f"Model saved as {filename}")
