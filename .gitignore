@@ -109,10 +109,10 @@ venv.bak/
 
 
 # user define
-Models/*.json
+Models/Trained-XGB/*.json
 !Models/NN_Models
 !Models/XGBoost_Models
 /Logs/
-/Screenshots/
-**Pipfile
+Pipfile.*
+Pipfile
 .vscode

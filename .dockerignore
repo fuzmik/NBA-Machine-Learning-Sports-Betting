@@ -30,6 +30,8 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-/Models/**
+##Models/Trained-XGB/*.json
+##!Models/NN_Models
+##!Models/XGBoost_Models
 LICENSE
 README.md
