@@ -4,8 +4,8 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/engine/reference/builder/
 
-#ARG PYTHON_VERSION=3.11.6
-FROM python:3.11.6-slim-bookworm as base
+ARG PYTHON_VERSION=3.11.6
+FROM python:${PYTHON_VERSION}-slim as base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -32,27 +32,18 @@ RUN adduser \
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-#RUN --mount=type=cache,target=/root/.cache/pip \
-#    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-#    python -m pip install -r requirements.txt
-# Install required dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install -U pip
-RUN pip uninstall -y flask gunicorn
-RUN pip install flask gunicorn
+RUN --mount=type=cache,target=/root/.cache/pip \
+    --mount=type=bind,source=requirements.txt,target=requirements.txt \
+    python -m pip install -r requirements.txt
 
 # Switch to the non-privileged user to run the application.
 USER appuser
 
 # Copy the source code into the container.
-COPY Flask /app/Flask
+COPY . .
 
 # Expose the port that the application listens on.
-EXPOSE 5000
+EXPOSE 8000
 
 # Run the application.
-#CD Flask
-#CMD gunicorn -w 2 'app:app' --bind=0.0.0.0:5000
-WORKDIR /app/Flask  # Navigate to the Flask directory
-CMD ["gunicorn", "-w", "2", "app:app", "--bind=0.0.0.0:5000"]
+CMD gunicorn 'Flask.app:app' --bind=0.0.0.0:8000
