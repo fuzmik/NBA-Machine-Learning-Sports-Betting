@@ -38,7 +38,8 @@ for season1 in tqdm(season):
                 continue
             if month1 in [4, 6, 9, 11] and day1 > 30:
                 continue
-            if month1 == 2 and day1 > 28:
+            # if month1 == 2 and day1 > 28:
+            if month1 == 2 and day1 > 29:
                 continue
             # skip future games
             if datetime.now() < datetime(year=int(end_year_pointer), month=month1, day=day1):
@@ -48,40 +49,41 @@ for season1 in tqdm(season):
             if not hasattr(sb, "games"):
                 continue
             for game in sb.games:
-                if game['home_team'] not in teams_last_played:
-                    teams_last_played[game['home_team']] = get_date(f"{season1}-{month1:02}{day1:02}")
-                    home_games_rested = timedelta(days=7)  # start of season, big number
-                else:
-                    current_date = get_date(f"{season1}-{month1:02}{day1:02}")
-                    home_games_rested = current_date - teams_last_played[game['home_team']]
-                    teams_last_played[game['home_team']] = current_date
-                    # todo update row
+                if game['home_team'] not in ['Team Stephen A','Team BallIsLife','Team Strictly']:
+                    if game['home_team'] not in teams_last_played:
+                        teams_last_played[game['home_team']] = get_date(f"{season1}-{month1:02}{day1:02}")
+                        home_games_rested = timedelta(days=7)  # start of season, big number
+                    else:
+                        current_date = get_date(f"{season1}-{month1:02}{day1:02}")
+                        home_games_rested = current_date - teams_last_played[game['home_team']]
+                        teams_last_played[game['home_team']] = current_date
+                        # todo update row
 
-                if game['away_team'] not in teams_last_played:
-                    teams_last_played[game['away_team']] = get_date(f"{season1}-{month1:02}{day1:02}")
-                    away_games_rested = timedelta(days=7)  # start of season, big number
-                else:
-                    current_date = get_date(f"{season1}-{month1:02}{day1:02}")
-                    away_games_rested = current_date - teams_last_played[game['away_team']]
-                    teams_last_played[game['away_team']] = current_date
+                    if game['away_team'] not in teams_last_played:
+                        teams_last_played[game['away_team']] = get_date(f"{season1}-{month1:02}{day1:02}")
+                        away_games_rested = timedelta(days=7)  # start of season, big number
+                    else:
+                        current_date = get_date(f"{season1}-{month1:02}{day1:02}")
+                        away_games_rested = current_date - teams_last_played[game['away_team']]
+                        teams_last_played[game['away_team']] = current_date
 
-                try:
-                    df_data.append({
-                        'Unnamed: 0': 0,
-                        'Date': f"{season1}-{month1:02}{day1:02}",
-                        'Home': game['home_team'],
-                        'Away': game['away_team'],
-                        'OU': game['total'][sportsbook],
-                        'Spread': game['away_spread'][sportsbook],
-                        'ML_Home': game['home_ml'][sportsbook],
-                        'ML_Away': game['away_ml'][sportsbook],
-                        'Points': game['away_score'] + game['home_score'],
-                        'Win_Margin': game['home_score'] - game['away_score'],
-                        'Days_Rest_Home': home_games_rested.days,
-                        'Days_Rest_Away': away_games_rested.days
-                    })
-                except KeyError:
-                    print(f"No {sportsbook} odds data found for game: {game}")
+                    try:
+                        df_data.append({
+                            'Unnamed: 0': 0,
+                            'Date': f"{season1}-{month1:02}{day1:02}",
+                            'Home': game['home_team'],
+                            'Away': game['away_team'],
+                            'OU': game['total'][sportsbook],
+                            'Spread': game['away_spread'][sportsbook],
+                            'ML_Home': game['home_ml'][sportsbook],
+                            'ML_Away': game['away_ml'][sportsbook],
+                            'Points': game['away_score'] + game['home_score'],
+                            'Win_Margin': game['home_score'] - game['away_score'],
+                            'Days_Rest_Home': home_games_rested.days,
+                            'Days_Rest_Away': away_games_rested.days
+                        })
+                    except KeyError:
+                        print(f"No {sportsbook} odds data found for game: {game}")
             time.sleep(random.randint(1, 3))
     begin_year_pointer = year[count]
 

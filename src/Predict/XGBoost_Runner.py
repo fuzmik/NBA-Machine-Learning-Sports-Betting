@@ -16,7 +16,7 @@ xgb_ml = xgb.Booster()
 xgb_ml.load_model('Models/XGBoost_Models/XGBoost_68.8%_ML-4.json')
 xgb_uo = xgb.Booster()
 #xgb_uo.load_model('Models/XGBoost_Models/XGBoost_53.7%_UO-9.json')
-xgb_uo.load_model('Models/XGBoost_Models/XGBoost_54.4%_UO-9.json')
+xgb_uo.load_model('Models/XGBoost_Models/XGBoost_54.0%_UO-9.json')
 
 def xgb_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, kelly_criterion):
     ml_predictions_array = []

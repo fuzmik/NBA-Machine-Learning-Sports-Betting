@@ -110,6 +110,7 @@ venv.bak/
 
 # user define
 Models/Trained-XGB/*.json
+src/Process-Data/backup/*
 !Models/NN_Models
 !Models/XGBoost_Models
 /Logs/
