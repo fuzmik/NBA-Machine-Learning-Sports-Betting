@@ -1,12 +1,17 @@
 # syntax=docker/dockerfile:1
 
-FROM arm64v8/ubuntu:22.04
+#Testing this image
+#FROM arm64v8/python:3.11.6-alpine3.17 as base
 #FROM debian:stretch-slim
+#line after this works
+FROM python:3.11.6-slim-bookworm as base
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+RUN mkdir /app
 WORKDIR /app
+VOLUME ["/app"]
 
 ARG UID=1000
 RUN adduser \
@@ -19,20 +24,18 @@ RUN adduser \
     appuser
 
 RUN apt update && \
-    apt install build-essential libhdf5-dev -y && \
-    apt autoclean
+    apt install pkg-config libhdf5-dev build-essential -y
 
-COPY . /app
 COPY requirements.txt /tmp/
-RUN pip install -r /tmp/requirements.txt && \
+RUN pip --no-cache-dir install -r /tmp/requirements.txt && \
     pip install -U pip && \
+    pip uninstall -y flask gunicorn && \
+    pip install -U flask gunicorn && \
     rm -rf /root/.cache
 
 USER appuser
 
-COPY Flask /app/Flask
-
-EXPOSE 5000
+EXPOSE 8800
 
 WORKDIR /app/Flask
-CMD ["gunicorn", "-w", "2", "app:app", "--bind=0.0.0.0:5000"]
+CMD ["gunicorn", "-w", "2", "app:app", "--bind=0.0.0.0:8800"]
