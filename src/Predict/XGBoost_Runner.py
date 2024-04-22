@@ -6,17 +6,41 @@ import xgboost as xgb
 from colorama import Fore, Style, init, deinit
 from src.Utils import Expected_Value
 from src.Utils import Kelly_Criterion as kc
+import glob
+import os
 
+init()
+# Get the path to the models directory
+models_dir = 'Models/XGBoost_Models'
+
+# Get a list of all JSON files in the models directory
+json_files = glob.glob(os.path.join(models_dir, '*ML-4.json'))
+
+# Sort the list by date and take the first item to get the most recent file
+most_recent_file = sorted(json_files, key=lambda x: os.path.getmtime(x))[0]
+
+# Load the most recent model using the XGBoost library
+xgb_ml = xgb.Booster()
+xgb_ml.load_model(most_recent_file)
+
+models_dir = 'Models/XGBoost_Models'
+json_files = glob.glob(os.path.join(models_dir, '*UO-9.json'))
+# Sort the list by size and take the first item to get the largest file
+largest_file = sorted(json_files, key=lambda x: os.path.getsize(x), reverse=True)[0]
+
+# Load the most recent model using the XGBoost library
+xgb_uo = xgb.Booster()
+xgb_uo.load_model(largest_file)
 
 # from src.Utils.Dictionaries import team_index_current
 # from src.Utils.tools import get_json_data, to_data_frame, get_todays_games_json, create_todays_games
-init()
-xgb_ml = xgb.Booster()
+#init()
+#xgb_ml = xgb.Booster()
 #xgb_ml.load_model('Models/XGBoost_Models/XGBoost_68.7%_ML-4.json')
-xgb_ml.load_model('Models/XGBoost_Models/XGBoost_68.8%_ML-4.json')
-xgb_uo = xgb.Booster()
+#xgb_ml.load_model('Models/XGBoost_Models')
+#xgb_uo = xgb.Booster()
 #xgb_uo.load_model('Models/XGBoost_Models/XGBoost_53.7%_UO-9.json')
-xgb_uo.load_model('Models/XGBoost_Models/XGBoost_54.0%_UO-9.json')
+#xgb_uo.load_model('Models/XGBoost_Models')
 
 def xgb_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, kelly_criterion):
     ml_predictions_array = []

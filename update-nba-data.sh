@@ -4,13 +4,13 @@
 cd src/Process-Data
 echo "Running: python -m Get_Data"
 echo "This command fetches data."
-python -m Get_Data1
+python -m Get_Data
 echo "Running: python -m Get_Odds_Data"
 echo "This command retrieves odds-related data."
-python -m Get_Odds_Data1
+python -m Get_Odds_Data
 echo "Running: python -m Create_Games"
 echo "This command creates game-related data."
-python -m Create_Games1
+python -m Create_Games
 
 # Train models
 echo "Changing directory to ../Train-Models"
