@@ -19,3 +19,7 @@ echo "Running: python -m XGBoost_Model_ML"
 python -m XGBoost_Model_ML
 echo "Running: python -m XGBoost_Model_UO"
 python -m XGBoost_Model_UO
+
+git add -A
+git commit -m "add new models"
+git push
