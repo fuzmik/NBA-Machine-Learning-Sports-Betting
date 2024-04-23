@@ -1,4 +1,4 @@
 #!/bin/bash
-python -m main -xgb -odds=fanduel
+python -m main -A -odds=fanduel
 
 exit 0
