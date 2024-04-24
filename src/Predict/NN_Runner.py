@@ -9,8 +9,8 @@ from src.Utils import Expected_Value
 from src.Utils import Kelly_Criterion as kc
 
 init()
-model = load_model('Models/Trained-Model-ML-1713833521.1602352')
-ou_model = load_model("Models/Trained-Model-OU-1713833564.3375854")
+model = load_model('Models/Trained-Model-ML-1713985434.9496336')
+ou_model = load_model("Models/Trained-Model-OU-1713985470.3616228/")
 
 
 def nn_runner(data, todays_games_uo, frame_ml, games, home_team_odds, away_team_odds, kelly_criterion):

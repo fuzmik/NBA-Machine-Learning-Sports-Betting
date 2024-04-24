@@ -11,7 +11,7 @@ python -m Get_Odds_Data
 echo "Running: python -m Create_Games"
 echo "This command creates game-related data."
 python -m Create_Games
-
+python -m Add_Days_Rest
 # Train models
 echo "Changing directory to ../Train-Models"
 cd ../Train-Models
