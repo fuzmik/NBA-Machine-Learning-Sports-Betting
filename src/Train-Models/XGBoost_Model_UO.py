@@ -33,13 +33,19 @@ for x in tqdm(range(100)):
         'max_depth': 20,
         'eta': 0.05,
         'objective': 'multi:softprob',
-        'num_class': 3
+        'num_class': 3,
+        'device': 'cuda',  # Use GPU for prediction
+        'tree_method': 'hist'  # Use GPU for training
+    }
+    paramtest = {
+        'device': 'cuda',  # Use GPU for prediction
+        'tree_method': 'hist'  # Use GPU for training
     }
     epochs = 750
 
     model = xgb.train(param, train, epochs)
 
-    predictions = model.predict(test)
+    predictions = model.predict(test, paramtest)
     y = []
 
     for z in predictions:
