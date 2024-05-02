@@ -117,3 +117,9 @@ src/Process-Data/backup/*
 Pipfile.*
 Pipfile
 .vscode
+conda*
+list*
+pip.package.txt
+nvidia*
+tf-detect-gpu.py
+pipenv.requirements.generated.txt
