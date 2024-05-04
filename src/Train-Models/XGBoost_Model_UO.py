@@ -9,8 +9,7 @@ from tqdm import tqdm
 
 dataset = "dataset_2012-24"
 con = sqlite3.connect("../../Data/dataset.sqlite")
-data = pd.read_sql_query(
-    f"select * from \"{dataset}\"", con, index_col="index")
+data = pd.read_sql_query(f"select * from \"{dataset}\"", con, index_col="index")
 con.close()
 OU = data['OU-Cover']
 total = data['OU']
@@ -34,25 +33,26 @@ for x in tqdm(range(100)):
         'eta': 0.05,
         'objective': 'multi:softprob',
         'num_class': 3,
-        'device': 'cuda',  # Use GPU for prediction
+        'device': 'cuda:0',  # Use GPU for prediction
         'tree_method': 'hist'  # Use GPU for training
     }
     paramtest = {
-        'device': 'cuda',  # Use GPU for prediction
+        'device': 'cuda:0',  # Use GPU for prediction
         'tree_method': 'hist'  # Use GPU for training
     }
     epochs = 750
 
     model = xgb.train(param, train, epochs)
 
-    predictions = model.predict(test, paramtest)
+    predictions = model.predict(test)
     y = []
 
     for z in predictions:
         y.append(np.argmax(z))
 
     acc = round(accuracy_score(y_test, y) * 100, 1)
-    print(f"{acc}%")
+    #print(f"{acc}%")
+    print(f"Accuracy: {acc}%")
 
     if acc > highest_acc:
         highest_acc = acc
