@@ -16,9 +16,9 @@ sys.path.insert(1, os.path.join(sys.path[0], '../..'))
 sportsbook = 'fanduel'
 df_data = []
 
-config = toml.load("config.toml")
+config = toml.load("../../config.toml")
 
-con = sqlite3.connect("Data/OddsData.sqlite")
+con = sqlite3.connect("../../Data/OddsData.sqlite")
 
 for key, value in config['get-odds-data'].items():
     date_pointer = datetime.strptime(value['start_date'], "%Y-%m-%d").date()
@@ -68,7 +68,7 @@ for key, value in config['get-odds-data'].items():
                 print(f"No {sportsbook} odds data found for game: {game}")
 
         date_pointer = date_pointer + timedelta(days=1)
-        time.sleep(random.randint(1, 3))
+        #time.sleep(random.randint(1, 3))
 
     df = pd.DataFrame(df_data, )
     df.to_sql(key, con, if_exists="replace")
