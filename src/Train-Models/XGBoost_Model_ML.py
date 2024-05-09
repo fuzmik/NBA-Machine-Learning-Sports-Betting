@@ -42,8 +42,8 @@ for x in tqdm(range(300)):
         y.append(np.argmax(z))
 
     acc = round(accuracy_score(y_test, y) * 100, 1)
-    print(f"{acc}%")
-    acc_results.append(acc)
+    print(f"Acurracy: {acc}%")
     # only save results if they are the best so far
     if acc == max(acc_results):
         model.save_model('../../Models/XGBoost_{}%_ML-4.json'.format(acc))
+        print(f"Modelname saved as: {model}")
