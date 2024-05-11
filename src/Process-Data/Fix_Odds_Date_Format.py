@@ -4,9 +4,9 @@ from datetime import datetime
 import pandas as pd
 import toml
 
-config = toml.load("../../config.toml")
+config = toml.load("config.toml")
 
-odds_con = sqlite3.connect("../../Data/OddsData.sqlite")
+odds_con = sqlite3.connect("Data/OddsData.sqlite")
 
 date_format = "%Y-%m-%d"
 
@@ -41,3 +41,4 @@ for key, value in config['get-data'].items():
     odds_df['Date'] = arr
     odds_df.drop(odds_df.filter(regex="Unname"), axis=1, inplace=True)
     odds_df.to_sql(f'odds_{key}_new', odds_con, if_exists="replace")
+

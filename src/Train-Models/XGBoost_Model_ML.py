@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
 dataset = "dataset_2012-24_new"
-con = sqlite3.connect("../../Data/dataset.sqlite")
+con = sqlite3.connect("Data/dataset.sqlite")
 data = pd.read_sql_query(f"select * from \"{dataset}\"", con, index_col="index")
 con.close()
 
@@ -19,7 +19,7 @@ data.drop(['Score', 'Home-Team-Win', 'TEAM_NAME', 'Date', 'TEAM_NAME.1', 'Date.1
 data = data.values
 
 data = data.astype(float)
-acc_results = []
+acc_results = [69]
 for x in tqdm(range(300)):
     x_train, x_test, y_train, y_test = train_test_split(data, margin, test_size=.1)
 
@@ -47,3 +47,5 @@ for x in tqdm(range(300)):
     if acc == max(acc_results):
         model.save_model('../../Models/XGBoost_{}%_ML-4.json'.format(acc))
         print(f"Modelname saved as: {model}")
+
+
