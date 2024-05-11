@@ -105,3 +105,13 @@ venv.bak/
 
 .idea
 .DS_Store
+Data/dataset.sqlite
+Data/nba-2023-UTC.csv
+Data/OddsData.sqlite
+Data/TeamData.sqlite
+.vscode/extensions.json
+.vscode/launch.json
+Models/*.json
+src/Train-Models/XGBoost_Model_ML-edited-eval.py
+src/Train-Models/XGBoost_Model_ML-edited.py
+Models/XGBoost_Models/XGBoost_93.3%_ML-155.json
