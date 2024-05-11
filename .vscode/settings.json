@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "database",
+            "database": "${workspaceFolder:NBA-ML}/Data/dataset.sqlite"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:NBA-ML}/Data/OddsData.sqlite",
+            "name": "oddsdata"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:NBA-ML}/Data/TeamData.sqlite",
+            "name": "teamdata"
+        }
+    ]
+}
