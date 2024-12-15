@@ -1,0 +1,45 @@
+version: '3.6'
+
+services:
+  nba:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - gunicorn
+      - -w
+      - "2"
+      - app:app
+      - --bind=0.0.0.0:8800
+    container_name: nba
+    environment:
+      HOSTNAME: nba
+      LANG: C.UTF-8
+      PATH: /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      TZ: America/Los_Angeles
+    image: nba:latest
+    labels:
+      cosmos-auto-update: "false"
+      cosmos-force-network-secured: "true"
+      #cosmos-icon: https://tfm.ovcn.ddnsfree.com/data/icons/nba-icon.png
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+    networks:
+      - default
+    ports:
+      - mode: ingress
+        target: 8800
+        published: "8800"
+        protocol: tcp
+    restart: unless-stopped
+    user: appuser
+    working_dir: /app/Flask
+    volumes:
+      - /opt/stacks/nba:/app
+
+networks:
+  default:
+    name: "cosmos-nba-default"
+    external: false
