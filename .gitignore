@@ -105,3 +105,12 @@ venv.bak/
 
 .idea
 .DS_Store
+Models/XGBoost_64.0%_ML-4.json
+Models/XGBoost_65.3%_ML-4.json
+Models/XGBoost_65.9%_ML-4.json
+Models/XGBoost_66.7%_ML-4.json
+Models/XGBoost_66.8%_ML-4.json
+Models/XGBoost_66.9%_ML-4.json
+Models/XGBoost_67.3%_ML-4.json
+Models/XGBoost_67.7%_ML-4.json
+Models/XGBoost_68.5%_ML-4.json
