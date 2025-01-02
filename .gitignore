@@ -105,3 +105,8 @@ venv.bak/
 
 .idea
 .DS_Store
+Logs
+Models/Trained-Model-ML-1734255979.1348267
+Models
+.envrc
+results.md
