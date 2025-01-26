@@ -31,7 +31,7 @@ USER appuser
 
 COPY Flask /app/Flask
 
-EXPOSE 5000
+EXPOSE 8800
 
 WORKDIR /app/Flask
-CMD ["gunicorn", "-w", "2", "app:app", "--bind=0.0.0.0:5000"]
+CMD ["gunicorn", "-w", "2", "app:app", "--bind=0.0.0.0:8800"]
